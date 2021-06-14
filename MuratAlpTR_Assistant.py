@@ -1,21 +1,33 @@
+import speech_recognition as sr
+import pyttsx3
+import datetime
+import wikipedia
+import pyjokes
 import playsound
-import  speech_recognition as sr
 from gtts import gTTS
 import webbrowser
 import os
 import random
+import datetime
+
+r = sr.Recognizer()
+engine = pyttsx3.init()
+
+def konuş(text):
+    engine.say(text)
+    engine.runAndWait()
 
 def konuş(yazı):
     tts = gTTS(text = yazı, lang= "tr")
-    dosya_ismi = "ses"+ str(random.randint(0,1000000000000000000000)) + ".mp3"
+    dosya_ismi = "ses"+ str(random.randint(0,1000000000000000000000)) + ".M4A"
     tts.save(dosya_ismi)
     playsound.playsound(dosya_ismi)
 
 def sesi_kaydet():
-    r = sr.Recognizer()
 
     with sr.Microphone() as kaynak:
         ses = r.listen(kaynak)
+        print('Dinleniyor...')
 
         söylenen_cümle = ""
 
@@ -27,6 +39,7 @@ def sesi_kaydet():
             konuş("söylediğin cümleyi anlayamadım")
 
     return söylenen_cümle
+
 
 if __name__=="__main__" :    
     konuş('Murat Alp hizmetinizde. Lütfen bugün size nasıl yardımcı olabilirim?')
@@ -133,3 +146,7 @@ while True:
     if "Müzik aç" in yazı or "müzik aç" in yazı or "Müzik açarmısın" in yazı:
             konuş("Müzik giriyoruz\n")
             webbrowser.open("https://open.spotify.com/playlist/0BQeHBftguFuQAtx4kteDr?si=8267616df7994c76")
+
+    if "Alp" in yazı:
+            yazı = yazı.replace("Alp","")
+            print(yazı)
