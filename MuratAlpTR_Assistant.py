@@ -29,16 +29,16 @@ def sesi_kaydet():
         ses = r.listen(kaynak)
         print('Dinleniyor...')
 
-        söylenen_cümle = ""
+        assistant_söylenen_cümle = ""
 
         try:
-            söylenen_cümle = r.recognize_google(ses, language="Tr-tr")
-            print(söylenen_cümle)
+            assistant_söylenen_cümle = r.recognize_google(ses, language="Tr-tr")
+            print(assistant_söylenen_cümle)
 
         except Exception:
             konuş("söylediğin cümleyi anlayamadım")
 
-    return söylenen_cümle
+    return assistant_söylenen_cümle
 
 
 if __name__=="__main__" :    
